@@ -1,24 +1,22 @@
 import React from "react";
-import { AsideInputs, InputsDaPagina, LabelDosInputs, TituloAside } from "../../style";
+import { FiltroDivPricipal, FormFiltro } from "../../style";
 
 
-function Filtter() {
+const Filtter= ({valorMinimo, valorMaximo, nomeProduto, setNome, setMinimo, setMaximo}) => {
 
-    
-
-    return(
-        <AsideInputs>
-          <TituloAside>Filtros</TituloAside>
-          <LabelDosInputs>Valor mínimo:</LabelDosInputs>
-          <InputsDaPagina type="text" /* onChange={(e)=>setFiltroValorMinimo(e.target.value)}  *//>
-          <LabelDosInputs>Valor máximo:</LabelDosInputs>
-          <InputsDaPagina type="text" /*value={} onChange={} *//>
-          <LabelDosInputs>Busca por nome:</LabelDosInputs>
-          <InputsDaPagina type="text" /*value={} onChange={} *//>
-        </AsideInputs>
+  return(
+  <FiltroDivPricipal>
+    <h1>Filtros</h1>
+    <FormFiltro>
+      <label>Valor Minímo</label>          
+      <input type="number" value={valorMinimo} onChange={(e)=>setMinimo(e.target.value)} placeholder="Valor Minímo"></input>
+      <label>Valor Máximo</label> 
+      <input type="number" value={valorMaximo} onChange={(e)=>setMaximo(e.target.value)} placeholder="Valor Máximo"></input>
+      <label>Nome do Produto</label> 
+      <input type="text" value={nomeProduto} onChange={(e)=>setNome(e.target.value)} placeholder="Nome do Produto"></input>
+    </FormFiltro>          
+  </FiltroDivPricipal>
     )
-    
 }
-
 
 export default Filtter;
