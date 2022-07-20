@@ -11,6 +11,7 @@ const Cart= (props) => {
         {props.listaDeCompras}
 
       <p>Valor Total:</p>
+      <label>{props.valorTotalDaCompra}</label>
     </CarrinhoDivPrincipal>
 )
 }
