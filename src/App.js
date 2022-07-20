@@ -1,4 +1,3 @@
-import "./App.css";
 import { DivCorpo, DivPai } from "./style";
 import React, { useState } from "react";
 import Filtter from "./Components/Filter/Filtter";
