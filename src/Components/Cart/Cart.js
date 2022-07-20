@@ -1,13 +1,18 @@
 import React from "react";
-import { AsideInputs, TituloAside } from "../../style";
+import { CarrinhoDivPrincipal } from "../../style";
 
-function Cart() {
-    return(
-        <AsideInputs>
-          <TituloAside>Carrinho</TituloAside>
-        </AsideInputs>
-    )
-    
+
+const Cart= (props) => {
+
+  return(
+    <CarrinhoDivPrincipal>
+      <h1>Carrinho</h1>
+
+        {props.listaDeCompras}
+
+      <p>Valor Total:</p>
+    </CarrinhoDivPrincipal>
+)
 }
 
 export default Cart;

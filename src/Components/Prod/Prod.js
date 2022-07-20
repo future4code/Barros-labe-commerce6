@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { PostContainer, PostFooter, PostHeader, PostPhoto } from "./style";
 
 
@@ -14,10 +14,10 @@ function Prod(props) {
       </div>
       </PostHeader>
       <PostFooter>
-      <button /* onClick={handleBotaoCart} */>Adicionar ao carrinho</button>
+      <button onClick={props.adicionarProduto}>Adicionar ao carrinho</button>
       </PostFooter>
     </PostContainer>
   );
 }
 
-export default Prod;
+export default Prod; */
