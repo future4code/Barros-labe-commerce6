@@ -22,8 +22,14 @@ function App() {
   const [inputValorMaximo, setInputValorMaximo] = useState(Infinity)
   const [inputNomeProduto, setInputNomeProduto] = useState("")
   const [compras, setCompras] = useState([])  
+<<<<<<< HEAD
 
 
+=======
+  const [valorTotalCompra,setValorTotalCompra] = useState(0)
+
+  
+>>>>>>> 3df10418eea93350dfeaf75603a81660a2d866b9
   const posts = dadosMockDeDados
   .filter((dadoMock)=>{
     return dadoMock.nameProd.toLowerCase().includes(inputNomeProduto.toLowerCase())
@@ -38,6 +44,7 @@ function App() {
     switch (homeOrdem){
       case "asc":
         return x.price - y.price
+<<<<<<< HEAD
       default:
         return y.price - x.price
     }
@@ -91,7 +98,73 @@ function App() {
     setHomeOrdenar={setHomeOrdem}
     setHomeIntenscart={setQuantidadeItensCart}/>
 
+=======
+        default:
+          return y.price - x.price
+        }
+      })
 
+
+    const quantidadeDeItenCart = posts.length
+    
+    const listaPosts = posts.map((dadoMock, index)=>{
+      return <CardPost 
+      key={index}>
+    <img src={dadoMock.photo} alt="Imagem do produto"></img>
+    <h3>{dadoMock.nameProd}</h3>
+    <p>R${dadoMock.price},00</p>
+    <button onClick={()=>{adicionarProduto(index, dadoMock)}}>Adicionar ao carrinho</button>
+    </CardPost>    
+  })
+  
+  
+  const totalCompra = compras.map(item=> item.price).reduce((prev,curr)=>prev + curr,0)||0;
+
+  const adicionarProduto = (index, dadoMock) => {   
+    const listaCompras = [...compras, {id: index, nameProd: dadoMock.nameProd, price: dadoMock.price, photo: dadoMock.photo}]
+    setCompras(listaCompras)
+    setValorTotalCompra(totalCompra)
+    
+   }
+  
+
+  const remover = (indexRemover) => {
+    const listaAtualizada = compras.filter((compra, index)=>{
+      return compra.id !== indexRemover
+    })
+    setCompras(listaAtualizada)
+    setValorTotalCompra(totalCompra)
+   }
+
+  const listaDeCompras = compras.map((post, index)=>{
+    return <CompraCarrinho key={index}><p>{post.nameProd}</p> <button onClick={()=>{remover(post.id)}}>Remover</button></CompraCarrinho>
+    
+  })
+
+   return (
+
+  <ContainerPrincipal>
+
+  <GlobalStyle/>
+>>>>>>> 3df10418eea93350dfeaf75603a81660a2d866b9
+
+  <Filtter 
+    valorMinimo={inputValorMinimo}
+    valorMaximo={inputValorMaximo}
+    nomeProduto={inputNomeProduto}
+    setMinimo={setInputValorMinimo}
+    setMaximo={setInputValorMaximo}
+    setNome={setInputNomeProduto} />
+      
+  <Home
+    listaPosts={listaPosts}
+    homeOrdernar={homeOrdem}
+    homeItensCart = {quantidadeDeItenCart} 
+    setHomeOrdenar={setHomeOrdem}
+    setHomeIntenscart={setQuantidadeItensCart}
+    
+    />
+    
       {/* {dadosMockDeDados
         .sort((x,y)=>{
           switch (homeOrdem){
@@ -121,7 +194,15 @@ function App() {
           );
         })} */}
     
+<<<<<<< HEAD
   <Cart listaDeCompras={listaDeCompras}/>
+=======
+  <Cart 
+  listaDeCompras={listaDeCompras}
+  valorTotalDaCompra={valorTotalCompra}
+  
+  />
+>>>>>>> 3df10418eea93350dfeaf75603a81660a2d866b9
 
 </ContainerPrincipal>
     
