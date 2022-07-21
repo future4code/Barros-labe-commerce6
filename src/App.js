@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+
 import { ContainerPrincipal, CompraCarrinho, CardPost } from "./style";
 import Filtter from "./Components/Filter/Filtter";
 import Home from "./Components/Home/Home";
@@ -12,11 +12,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-`;
+
 
 function App() {
   const [dadosMockDeDados] = useState(MockDeDados);
   const [homeOrdem, setHomeOrdem] = useState("asc");
+
   const [quantidadeItensCart, setQuantidadeItensCart] = useState("");
   const [inputValorMinimo, setInputValorMinimo] = useState(-Infinity);
   const [inputValorMaximo, setInputValorMaximo] = useState(Infinity);
@@ -172,6 +173,7 @@ function App() {
         valorTotalDaCompra={valorTotalCompra}
       />
     </ContainerPrincipal>
+
   );
 }
 
