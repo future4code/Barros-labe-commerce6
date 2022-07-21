@@ -1,19 +1,18 @@
 import React from "react";
 import { CarrinhoDivPrincipal } from "../../style";
 
-
-const Cart= (props) => {
-
-  return(
+const Cart = (props) => {
+  return (
     <CarrinhoDivPrincipal>
       <h1>Carrinho</h1>
 
-        {props.listaDeCompras}
+      {props.listaDeCompras}
 
       <p>Valor Total:</p>
-      <label>{props.valorTotalDaCompra}</label>
+      <label>R${props.valorTotalDaCompra},00</label>
     </CarrinhoDivPrincipal>
-)
-}
+  );
+};
 
 export default Cart;
+
