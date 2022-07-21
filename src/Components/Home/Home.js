@@ -14,8 +14,7 @@ function Home(props) {
 
       <Ordem>
 
-        <p>Quantidade de Produtos: {props.homeItensCart}</p>      
-
+        <p>Quantidade de Produtos: {props.listaPosts.length}</p>      
 
         <select value={props.homeOrdernar} onChange={handleSeletorOrden}>
           <option value={"asc"}>Crescente</option>
