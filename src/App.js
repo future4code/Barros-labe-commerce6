@@ -23,6 +23,7 @@ function App() {
   const [compras, setCompras] = useState([]);
   const [valorTotalCompra, setValorTotalCompra] = useState(0);
   const [contadorDeProdutos, setContadorDeProdutos] = useState(0)
+  
 
   const posts = dadosMockDeDados
     .filter((dadoMock) => {
@@ -30,21 +31,25 @@ function App() {
         .toLowerCase()
         .includes(inputNomeProduto.toLowerCase());
     })
-    .filter((dadoMock) => {
-      return dadoMock.price >= inputValorMinimo || inputValorMinimo === "";
-    })
-    .filter((dadoMock) => {
-      return dadoMock.price <= inputValorMaximo || inputValorMaximo === "";
-    })
-    .sort((x, y) => {
-      switch (homeOrdem) {
-        case "asc":
-          return x.price - y.price;
-        default:
-          return y.price - x.price;
-      }
-    });
+  .filter((dadoMock)=>{
+    return dadoMock.nameProd.toLowerCase().includes(inputNomeProduto.toLowerCase())
+  })
+  .filter((dadoMock)=>{
+    return dadoMock.price >= inputValorMinimo || inputValorMinimo === ""
+  })
+  .filter((dadoMock)=>{
+    return dadoMock.price <= inputValorMaximo || inputValorMaximo === ""
+  })
+  .sort((x,y)=>{
+    switch (homeOrdem){
+      case "asc":
+        return x.price - y.price
+      default:
+        return y.price - x.price
+    }
+  })
 
+  
   function quantidadeDeItemCart() {
     const valor = posts.length;
     return valor;
@@ -134,7 +139,6 @@ function App() {
     );
   });
  
-
   return (
     <ContainerPrincipal>
       <GlobalStyle />
