@@ -20,7 +20,7 @@ export const MockDeDados= [
     {
         id:2,
         nameProd: "Caneca da NASA",
-        price: 300,
+        price: 50,
         photo: Produto2,
     },
     {
@@ -61,23 +61,24 @@ export const MockDeDados= [
     {
         id:8,
         nameProd: "Camisa Planetas",
-        price: 700,
+        price: 100,
         photo: Produto8,
 
     },
     {
         id:9,
-        nameProd: "Produto 9",
-        pr9ce: 700,
+        nameProd: "Camisa Galaxia",
+        price: 100,
         photo: Produto9,
 
     },
     {
         id:10,
-        nameProd: "Produto 10",
-        pri10e: 700,
+        nameProd: "Camisa Astronauta",
+        price: 120,
         photo: Produto10,
 
     },
+
 
 ]

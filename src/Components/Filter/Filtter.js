@@ -2,7 +2,6 @@ import React from "react";
 import { FiltroDivPricipal, FormFiltro } from "../../style";
 import iconeFiltro from "../../img/ico_satelite.png";  //samuel
 
-
 const Filtter= ({valorMinimo, valorMaximo, nomeProduto, setNome, setMinimo, setMaximo}) => {
 
   return(
