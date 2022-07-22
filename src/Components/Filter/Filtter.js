@@ -1,11 +1,12 @@
 import React from "react";
 import { FiltroDivPricipal, FormFiltro } from "../../style";
-
+import iconeFiltro from "../../img/ico_satelite.png";  //samuel
 
 const Filtter= ({valorMinimo, valorMaximo, nomeProduto, setNome, setMinimo, setMaximo}) => {
 
   return(
   <FiltroDivPricipal>
+     <img src={iconeFiltro} alt="icone planeta" height={50} width={50} />  
     <h1>Filtros</h1>
     <FormFiltro>
       <label>Valor Minímo</label>          
