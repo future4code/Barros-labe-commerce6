@@ -11,8 +11,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-`;
- 
+`
+
 function App() {
   const [dadosMockDeDados] = useState(MockDeDados);
   const [homeOrdem, setHomeOrdem] = useState("asc");
@@ -48,7 +48,6 @@ function App() {
         return y.price - x.price
     }
   })
-
   
   function quantidadeDeItemCart() {
     const valor = posts.length;
@@ -80,7 +79,6 @@ function App() {
     );
   });
 
-
   function totalCompra() {
     const valorTotal =
       compras
@@ -88,7 +86,6 @@ function App() {
         .reduce((prev, curr) => prev + curr, 0) || 0;
     return valorTotal;
   }
-
 
   const adicionarProduto = (indexItem, item) => {
 
@@ -102,15 +99,7 @@ function App() {
       },
     ];
   
-  /*   console.log(listaCompras[indexItem].nameProd)
-
-    for(let i = 0; i < listaCompras.length ; i++){
-      if(listaCompras[indexItem].nameProd === (item.nameProd)){
-        return setContadorDeProdutos(contadorDeProdutos++)
-      }
-    } */
-
-    setCompras(listaCompras);
+     setCompras(listaCompras);
   };
 
   const remover = (postId) => {
@@ -119,8 +108,6 @@ function App() {
     });
     setCompras(listaAtualizada);
   };
-
-
 
   const listaDeCompras = compras.map((post, index) => {
 
