@@ -22,7 +22,6 @@ function App() {
   const [inputNomeProduto, setInputNomeProduto] = useState("");
   const [compras, setCompras] = useState([]);
   const [valorTotalCompra, setValorTotalCompra] = useState(0);
-  const [contadorDeProdutos, setContadorDeProdutos] = useState(1)
   
 
   const posts = dadosMockDeDados
@@ -62,6 +61,19 @@ function App() {
     setValorTotalCompra(totalCompra());
   }, [compras]);
 
+  useEffect(()=>{
+    localStorage.setItem("valorTotal", `${valorTotalCompra}`)
+    localStorage.getItem("valorTotal")
+  }, [valorTotalCompra])
+
+/*   useEffect(()=>{
+    localStorage.setItem("lista", JSON.stringify(compras))
+    const lista = localStorage.getItem("lista")
+    lista = JSON.parse(lista)
+  }, [compras])
+
+  console.log(compras) */
+
   const listaPosts = posts.map((dadoMock, index, array) => {
     return (
       <CardPost key={index}>
@@ -89,49 +101,20 @@ function App() {
 
   const adicionarProduto = (dadoMock, index, array) => {
 
-    /* Eu fiz um if/else pra ver se já tem no carrinho... se não tem, ele só adiciona (usei filter) e se tem, daí ele entra num for e nesse for ele atualiza a quantidade de produtos 
-    do objeto. Eu coloquei a quantidade no mock de dados, Começando com 1.
-
-    Eu fiz isso dentro do for. Dentro dele eu coloco if pra ver se o botão clicado (eu pego o nome do produto) é igual a algum dos produtos que está no array
-    Basicamente, eu pego o produto selecionado e comparo ele com todos que estão dentro do array
-    se algum for igual, só atualiza a quantidade, se não adiciona. */
-    
-    let contador = contadorDeProdutos + 1
-    setContadorDeProdutos(contador)
-
     const listaCompras = [
+      ...compras,
       {
         id: dadoMock.id,
-        quantidade: 1,
+        quantidade: dadoMock.quantidade,
         nameProd: dadoMock.nameProd,
-        price: dadoMock.price,
+        price: dadoMock.price
       }
     ]
 
     setCompras(listaCompras)
 
-    if(compras.includes(dadoMock.id)){
-      setCompras([
-      {
-        id: dadoMock.id,
-        quantidade: 1,
-        nameProd: dadoMock.nameProd,
-        price: dadoMock.price,
-      }
-      ])
-    } else {
-      setCompras([
-        ...compras,
-      {
-        id: dadoMock.id,
-        quantidade: contadorDeProdutos,
-        nameProd: dadoMock.nameProd,
-        price: dadoMock.price,
-      }
-      ])
-    }
-
   };
+
 
   const remover = (postId) => {
     const listaAtualizada = compras.filter((compra, index) => {
@@ -144,7 +127,8 @@ function App() {
 
     return (
       <CompraCarrinho key={index}>
-        <p>{post.quantidade}x {post.nameProd}</p>        
+        <p>{post.quantidade}x</p>
+        <p>{post.nameProd}</p>        
         <button
           onClick={() => {
             remover(post.id);

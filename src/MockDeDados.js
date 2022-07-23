@@ -11,69 +11,80 @@ import Produto10 from "./img/Produto10.png";  //samuel
 
 
 export const MockDeDados= [
+
     {
-        id:0,
+        quantidade:1,
+        id:1,
         nameProd: "Projetor Astronauta",
         price: 259,
         photo: Produto1,
     },
     {
-        id:1,
+        quantidade:1,
+        id:2,
         nameProd: "Caneca da NASA",
         price: 50,
         photo: Produto2,
     },
     {
-        id:2,
+        quantidade:1,
+        id:3,
         nameProd: "Onibus Espacial",
         price: 400,
         photo: Produto3,
 
     },
     {
-        id:3,
+        quantidade:1,
+        id:4,
         nameProd: "Kit Espacial",
         price: 500,
         photo: Produto4,
 
     },
     {
-        id:4,
+        quantidade:1,
+        id:5,
         nameProd: "Toca Espacial",
         price: 600,
         photo: Produto5,
 
     },
     {
-        id:5,
+        quantidade:1,
+        id:6,
         nameProd: "Capacete NASA",
         price: 700,
         photo: Produto6,
 
     },
     {
-        id:6,
+        quantidade:1,
+        id:7,
         nameProd: "Pistola de Led",
         price: 700,
         photo: Produto7,
 
     },
     {
-        id:7,
+        quantidade:1,
+        id:8,
         nameProd: "Camisa Planetas",
         price: 100,
         photo: Produto8,
 
     },
     {
-        id:8,
+        quantidade:1,
+        id:9,
         nameProd: "Camisa Galaxia",
         price: 100,
         photo: Produto9,
 
     },
     {
-        id:9,
+        quantidade:1,
+        id:10,
         nameProd: "Camisa Astronauta",
         price: 120,
         photo: Produto10,
