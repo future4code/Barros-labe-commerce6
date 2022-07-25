@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-`
+`;
 
 function App() {
   const [dadosMockDeDados] = useState(MockDeDados);
@@ -20,9 +20,9 @@ function App() {
   const [inputValorMinimo, setInputValorMinimo] = useState(-Infinity);
   const [inputValorMaximo, setInputValorMaximo] = useState(Infinity);
   const [inputNomeProduto, setInputNomeProduto] = useState("");
-  const [compras, setCompras] = useState([]);
+  const [compras, setCompras]= useState (()=> {const saved= localStorage.getItem ("compras"); const initialValue=JSON.parse (saved); return initialValue || [] ;});  
   const [valorTotalCompra, setValorTotalCompra] = useState(0);
-  
+  const [contadorDeProdutos, setContadorDeProdutos] = useState(0);
 
   const posts = dadosMockDeDados
     .filter((dadoMock) => {
@@ -30,24 +30,26 @@ function App() {
         .toLowerCase()
         .includes(inputNomeProduto.toLowerCase());
     })
-  .filter((dadoMock)=>{
-    return dadoMock.nameProd.toLowerCase().includes(inputNomeProduto.toLowerCase())
-  })
-  .filter((dadoMock)=>{
-    return dadoMock.price >= inputValorMinimo || inputValorMinimo === ""
-  })
-  .filter((dadoMock)=>{
-    return dadoMock.price <= inputValorMaximo || inputValorMaximo === ""
-  })
-  .sort((x,y)=>{
-    switch (homeOrdem){
-      case "asc":
-        return x.price - y.price
-      default:
-        return y.price - x.price
-    }
-  })
-  
+    .filter((dadoMock) => {
+      return dadoMock.nameProd
+        .toLowerCase()
+        .includes(inputNomeProduto.toLowerCase());
+    })
+    .filter((dadoMock) => {
+      return dadoMock.price >= inputValorMinimo || inputValorMinimo === "";
+    })
+    .filter((dadoMock) => {
+      return dadoMock.price <= inputValorMaximo || inputValorMaximo === "";
+    })
+    .sort((x, y) => {
+      switch (homeOrdem) {
+        case "asc":
+          return x.price - y.price;
+        default:
+          return y.price - x.price;
+      }
+    });
+
   function quantidadeDeItemCart() {
     const valor = posts.length;
     return valor;
@@ -66,15 +68,10 @@ function App() {
     localStorage.getItem("valorTotal")
   }, [valorTotalCompra])
 
-/*   useEffect(()=>{
-    localStorage.setItem("lista", JSON.stringify(compras))
-    const lista = localStorage.getItem("lista")
-    lista = JSON.parse(lista)
-  }, [compras])
+  useEffect (()=> {localStorage.setItem ("compras", JSON.stringify(compras));}, [compras]);
 
-  console.log(compras) */
 
-  const listaPosts = posts.map((dadoMock, index, array) => {
+  const listaPosts = posts.map((dadoMock, index) => {
     return (
       <CardPost key={index}>
         <img src={dadoMock.photo} alt="Imagem do produto"></img>
@@ -82,7 +79,7 @@ function App() {
         <p>R${dadoMock.price},00</p>
         <button
           onClick={() => {
-            adicionarProduto(dadoMock, index, array);
+            adicionarProduto(index, dadoMock);
           }}
         >
           Adicionar ao carrinho
@@ -98,37 +95,62 @@ function App() {
         .reduce((prev, curr) => prev + curr, 0) || 0;
     return valorTotal;
   }
+  
+  const adicionarProduto = (indexItem, item) => {
+    const startIndex = compras.some((obj) => obj.nameProd === item.nameProd);
 
-  const adicionarProduto = (dadoMock, index, array) => {
+    if (startIndex === true) {
+      compras.forEach((obj) => {
+        if (obj.id === indexItem) {
+          obj.quantidade++;
+          setValorTotalCompra(obj.price+valorTotalCompra)
+        }
+      });
 
-    const listaCompras = [
-      ...compras,
-      {
-        id: dadoMock.id,
-        quantidade: dadoMock.quantidade,
-        nameProd: dadoMock.nameProd,
-        price: dadoMock.price
-      }
-    ]
+      setContadorDeProdutos([...compras]);
+            
+    } else {
+      const listaCompras = [
+        ...compras,
+        {
+          id: indexItem,
+          nameProd: item.nameProd,
+          price: item.price,
+          photo: item.photo,
+          quantidade: 1,
+        },
+      ];
 
-    setCompras(listaCompras)
-
+      setCompras(listaCompras);
+    }
   };
 
-
   const remover = (postId) => {
-    const listaAtualizada = compras.filter((compra, index) => {
-      return compra.id !== postId;
-    });
-    setCompras(listaAtualizada);
+    const startIndex = compras.some(
+      (obj) => obj.id === postId && obj.quantidade > 1
+    );
+
+    if (startIndex === true) {
+      compras.forEach((obj) => {
+        if (obj.id === postId && obj.quantidade > 1) {
+          obj.quantidade--;
+          setValorTotalCompra(valorTotalCompra-obj.price)
+        }
+      });
+      setContadorDeProdutos([...compras]);
+    } else {
+      const listaAtualizada = compras.filter((compra, index) => {
+        return compra.id !== postId;
+      });
+      setCompras(listaAtualizada);
+    }
   };
 
   const listaDeCompras = compras.map((post, index) => {
-
     return (
       <CompraCarrinho key={index}>
         <p>{post.quantidade}x</p>
-        <p>{post.nameProd}</p>        
+        <p>{post.nameProd}</p>{" "}
         <button
           onClick={() => {
             remover(post.id);
@@ -139,7 +161,7 @@ function App() {
       </CompraCarrinho>
     );
   });
- 
+
   return (
     <ContainerPrincipal>
       <GlobalStyle />
